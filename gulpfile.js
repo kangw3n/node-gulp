@@ -8,7 +8,7 @@ var rupture = require('rupture');
 var del = require('del');
 var pngquant = require('imagemin-pngquant');
 
-gulp.task('sass', function() {
+gulp.task('sass', function() { 
   return gulp
     .src('public/scss/*.scss')
     .pipe($.sass())

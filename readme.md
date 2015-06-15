@@ -1,4 +1,4 @@
-##This is Gulp-task for personal uses
+##This is Gulp-task for personal used
 
 This repo will do all the stuff for scaffolding a fresh projects to be watch by Gulp Task Runner. Simply by installing a node grunt-cli packages.
 

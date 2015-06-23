@@ -13,6 +13,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.exe
 
 # Windows shortcuts
 *.lnk
@@ -20,3 +21,6 @@ $RECYCLE.BIN/
 .sass-cache
 *.css.map
 node_modules
+npm-debug.log
+.grunt
+.DS_Store

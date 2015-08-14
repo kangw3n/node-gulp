@@ -1,1 +1,0 @@
-function foo(n,o){return n+o}

@@ -8,24 +8,38 @@ var rupture = require('rupture');
 var del = require('del');
 var pngquant = require('imagemin-pngquant');
 
-gulp.task('sass', function() {
-  return gulp
-    .src('public/scss/*.scss')
-    .pipe($.sass())
-    .pipe(gulp.dest('public/css/'))
-    .pipe(browserSync.stream());
+gulp.task('csscomb', function() {
+  return gulp.src('public/css/*.css')
+    .pipe($.csscomb())
+    .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('compass', function() {
-  return gulp
-    .src('public/scss/*.scss')
-    .pipe($.compass({
-      config_file: 'config.rb',
-      css: 'public/css',
-      sass: 'public/scss'
+// gulp.task('sass', function() {
+//   return gulp
+//     .src('public/scss/*.scss')
+//     .pipe($.sass())
+//     .pipe(gulp.dest('public/css/'))
+//     .pipe(browserSync.stream());
+// });
+
+// gulp.task('compass', function() {
+//   return gulp
+//     .src('public/scss/*.scss')
+//     .pipe($.compass({
+//       config_file: 'config.rb',
+//       css: 'public/css',
+//       sass: 'public/scss'
+//     }))
+//     .pipe(gulp.dest('public/css/'))
+//     .pipe(browserSync.stream());
+// });
+
+gulp.task('jade', function() {
+  gulp.src('public/partials/*.jade')
+    .pipe($.jade({
+      pretty: true,
     }))
-    .pipe(gulp.dest('public/css/'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('public/partials/'));
 });
 
 gulp.task('imgmin', function() {
@@ -33,7 +47,7 @@ gulp.task('imgmin', function() {
     .pipe($.imagemin({
       progressive: true,
       svgoPlugins: [{removeViewBox: false}],
-      use: [pngquant()]
+      use: [pngquant()],
     }))
     .pipe(gulp.dest('public/img/'));
 });
@@ -47,9 +61,9 @@ gulp.task('stylus', function() {
 
         //koutoSwiss(),
         //nib(),
-        rupture()
+        rupture(),
       ],
-      'include css': true
+      'include css': true,
 
       // compress: true
     }))
@@ -77,12 +91,15 @@ gulp.task('default', function() {
       clicks: true,
       location: true,
       forms: true,
-      scroll: true
-    }
+      scroll: true,
+    },
   });
 
   gulp.watch('public/stylus/*.styl', ['stylus']);
-  gulp.watch('public/scss/*.scss', ['compass']);
+  gulp.watch('public/css/*.css', ['csscomb']);
+  gulp.watch('public/partials/*.jade', ['jade']);
+
+  // gulp.watch('public/scss/*.scss', ['compass']);
   gulp.watch('public/**/*.*').on('change', browserSync.reload);
 
 });
@@ -98,7 +115,7 @@ gulp.task('build', ['html'], function(cb) {
       clicks: true,
       location: true,
       forms: true,
-      scroll: true
-    }
+      scroll: true,
+    },
   });
 });

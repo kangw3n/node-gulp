@@ -1,0 +1,47 @@
+include variables
+doctype html
+head
+  meta(charset='UTF-8')
+  title 看樣 UDN.Group
+  meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+  link(rel='stylesheet', href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css')
+  link(rel='stylesheet', href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css')
+  link(rel='stylesheet', href='css/master.css')
+.container
+  .curl
+  header
+    h1
+      | 專案執行
+      span
+        span.udn udn
+        | .com
+    #date
+    h2.tlt(data-in-effect='tada')
+      block projectTitle 
+    block status
+    h3(data-out-effect='fadeIn') 設計：kangw3n
+  table.rwd-table
+    tr
+      th 頁面
+      th 連結與狀況
+    block subPages
+    tr
+      td.details(colspan='2')
+        ul
+          li
+            .btn.finish 完成
+          li
+            .btn.waiting 追踪
+          li
+            .btn.in-progress 小幅修改
+          li
+            .btn.error 錯誤
+  footer
+    | design by：
+    br
+    a(href='mailto:kangwen.wong@udngroup.com', target='_top') kangwen.wong@udngroup
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js')
+script(src='js/lib/jquery.textillate.js')
+script(src='http://s3-ap-northeast-1.amazonaws.com/justfont-user-script/jf-33607.js')
+script(src='js/base.js')

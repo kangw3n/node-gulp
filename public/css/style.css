@@ -1,2 +1,16 @@
 
+@media screen and (min-width: 1280px) {p {
+    font-size: 21px;
+  }
+}img {
+  width: 100%;
+}
+p {
+  font-size: calc(12px + 9 * ( (100vw - 420px) / 860));
+}
+@media screen and (max-width: 420px) {p {
+    font-size: 12px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

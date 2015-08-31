@@ -1,9 +1,10 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: true });
 var browserSync = require('browser-sync').create();
+var poststylus = require('poststylus');
 
-//var koutoSwiss = require('kouto-swiss');
-//var nib = require('nib');
+var koutoSwiss = require('kouto-swiss');
+var nib = require('nib');
 var rupture = require('rupture');
 var del = require('del');
 var pngquant = require('imagemin-pngquant');
@@ -12,6 +13,12 @@ gulp.task('csscomb', function() {
   return gulp.src('public/css/*.css')
     .pipe($.csscomb())
     .pipe(gulp.dest('public/css'));
+});
+
+gulp.task('purify', function() {
+  return gulp.src('dist/css/**/*.css')
+    .pipe($.purifycss(['dist/js/*.js', 'dist/**/*.html']))
+    .pipe(gulp.dest('dist/'));
 });
 
 // gulp.task('sass', function() {
@@ -35,11 +42,11 @@ gulp.task('csscomb', function() {
 // });
 
 gulp.task('jade', function() {
-  gulp.src('public/partials/*.jade')
+  gulp.src('public/*.jade')
     .pipe($.jade({
       pretty: true,
     }))
-    .pipe(gulp.dest('public/partials/'));
+    .pipe(gulp.dest('public/'));
 });
 
 gulp.task('imgmin', function() {
@@ -61,6 +68,7 @@ gulp.task('stylus', function() {
 
         //koutoSwiss(),
         //nib(),
+        poststylus(['rucksack-css']),
         rupture(),
       ],
       'include css': true,
@@ -95,9 +103,22 @@ gulp.task('default', function() {
     },
   });
 
+  gulp.task('demoJade', function() {
+    return gulp.src('public/demo/index.jade')
+      .pipe($.jade())
+      .pipe(gulp.dest('public/demo/'));
+  });
+
+  gulp.task('demoStylus', function() {
+    return gulp.src('public/demo/css/*.styl')
+      .pipe($.stylus({compress: true}))
+      .pipe(gulp.dest('public/demo/css/'));
+  });
+
+  gulp.watch('public/demo/**/*.*', ['demoJade', 'demoStylus']);
   gulp.watch('public/stylus/*.styl', ['stylus']);
   gulp.watch('public/css/*.css', ['csscomb']);
-  gulp.watch('public/partials/*.jade', ['jade']);
+  gulp.watch('public/**/*.jade', ['jade']);
 
   // gulp.watch('public/scss/*.scss', ['compass']);
   gulp.watch('public/**/*.*').on('change', browserSync.reload);
@@ -105,9 +126,9 @@ gulp.task('default', function() {
 });
 
 gulp.task('build', ['html'], function(cb) {
-  del(['dist/stylus', 'dist/css/**.map', 'dist/scss', 'dist/ori_images'], cb);
+  del(['dist/stylus', 'dist/css/**.map', 'dist/scss', 'dist/ori_images', 'dist/**.jade', 'dist/partials'], cb);
   browserSync.init({
-    server: './dist',
+    server: './dist/demo/',
     browser: ['google chrome', 'firefox', 'IExplore.exe'],
     notify: false,
     open: false,

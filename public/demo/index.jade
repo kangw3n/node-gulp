@@ -1,0 +1,12 @@
+extends layout
+block projectTitle
+  | 專案題目
+
+block status
+  p #[span 說明：]  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam mollitia beatae, sapiente consectetur officia aliquid incidunt quisquam ducimus repellendus eligendi recusandae praesentium temporibus totam, consequatur explicabo nobis! Ad repellendus, aliquam.
+  
+block subPages
+  +trTab('頁面稱', '/page1.html', '目前狀況')(class='finish')
+  +trTab('頁面名稱', '/page1.html', '目前狀況')(class='waiting')
+  +trTab('頁面名稱', '/page1.html', '目前狀況')(class='error')
+  +trTab('頁面名稱', '/page1.html', '目前狀況')(class='in-progress')

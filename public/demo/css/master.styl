@@ -3,7 +3,11 @@ $basecolor = #2c3e50
 $basewhite = #eff3f3
 $udncolor = #ee5103
 
-
+html
+  overflow-x hidden
+html
+body
+  height 100%
 body
   background $bgcolor
   font-family Meiryo, "微軟正黑體", "Microsoft JhengHei"
@@ -52,7 +56,7 @@ header
     @media(max-width: 590px)
       font-size 2em
   p
-    margin 10px 30px 0 30px
+    margin 10px auto
     width 55%
   h3
     margin-bottom 20px
@@ -84,6 +88,8 @@ footer
   font-size 10px
   border-top 1px #BFBBAE solid
   border-bottom 1px #BFBBAE solid
+  @media(max-width: 767px)
+    position inherit
   a
     &:link
       color #BFBBAE

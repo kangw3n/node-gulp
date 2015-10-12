@@ -1,12 +1,66 @@
 
-@media screen and (min-width: 1280px) {p {
-    font-size: 21px;
-  }
-}img {
+header {
+  font-size: 12px;
+}
+footer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+
+  box-shadow: 10px 10px 5px 0 rgba(0,0,0,.75);
+}
+html {
+  font-family: Gill Sans Extrabold, sans-serif;
+
+  background: #acacac;
+}
+img {
   width: 100%;
 }
 p {
   font-size: calc(12px + 9 * ( (100vw - 420px) / 860));
+}
+@media screen and (min-width: 1280px) {p {
+    font-size: 21px;
+  }
+}
+@media only screen and (min-width: 991px) {
+  footer {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+@media only screen and (min-width: 767px) {
+  footer {
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  img {
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+  img {
+    text-align: left;
+  }
+}
+@media only screen and (min-width: 767px) and (max-width: 991px) {
+  img {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 300px) and (max-width: 300px) {
+  .no-js {
+    width: 300px;
+
+    border: 1px solid #f00;
+  }
 }
 @media screen and (max-width: 420px) {p {
     font-size: 12px;

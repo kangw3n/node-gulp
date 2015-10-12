@@ -1,23 +1,31 @@
 include var/mixin
-include var/variables
+block config
+  include var/variables
 doctype
-html(lang="en")
-head
-  meta(charset="UTF-8")
-  meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
-  title #{title} - 
-    block pageName
-  +styleSources
-  link(rel="stylesheet", href="css/style.css")
+html(lang="zh-tw")
+  head
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+    title #{title}   
+    
+    +styleSources
+    block independentCSS
+    link(rel="stylesheet", href="css/style.css")
+    if blockCSS
+      style
+        block inlineCSS
+    
+    
   
-body
-  include header 
-  
-  block maincontent
+  body(class=bodyClass)
+    include header 
+    
+    block maincontent
 
-  include footer
-  
-  +scriptSources
-  block independentJS
-  script(src="js/script.js")
-  block script
+    include footer
+    
+    
+    +scriptSources  
+    block independentJS
+    script(src="js/script.js")
+    block script

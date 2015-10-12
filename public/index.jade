@@ -1,6 +1,22 @@
 extends partials/layout
-block pageName 
-  | index 
+append config
+  - var jQuery = true
+  - var thisBodyClass = bodyClass.push('addBodyClasses')
+  - var thisPageTitle = 'Index Page'
+  - var title = title.concat(' | ' + thisPageTitle)
+  - var blockCSS = false
+
+block independentCSS
+  // build:css css/index.min.css
+  link(href="css/depencs1.css" rel="stylesheet")
+  link(href="css/index.css" rel="stylesheet")
+  // endbuild  
+
+block inlineCSS
+  :stylus
+    body
+      font-size 12px
+
 block maincontent
   .container
     h1 This is Main Content Pages1
@@ -8,7 +24,11 @@ block maincontent
     img(src="img/mavericks-wallpaper-43.jpg", alt="Mavericks")
 
 block independentJS
-  script(src="thispage.js")
+  // build:js js/index.min.js
+  script(src="js/depenc1.js")
+  script(src="js/index.js")
+  // endbuild  
+
 block script
   script.
-   console.log('test')
+    console.log('test')

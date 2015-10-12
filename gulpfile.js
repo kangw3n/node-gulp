@@ -1,5 +1,7 @@
 var gulp = require('gulp');
-var $ = require('gulp-load-plugins')({ lazy: true });
+var $ = require('gulp-load-plugins')({
+  lazy: true,
+});
 var browserSync = require('browser-sync').create();
 var poststylus = require('poststylus');
 
@@ -10,16 +12,24 @@ var del = require('del');
 var pngquant = require('imagemin-pngquant');
 
 gulp.task('csscomb', function() {
-  return gulp.src('public/css/*.css')
+  return gulp.src('./public/css/*.css')
     .pipe($.csscomb())
-    .pipe(gulp.dest('public/css'));
+    .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('purify', function() {
-  return gulp.src('dist/css/**/*.css')
-    .pipe($.purifycss(['dist/js/*.js', 'dist/**/*.html']))
-    .pipe(gulp.dest('dist/'));
-});
+// gulp.task('purify', function() {
+//   return gulp.src('./dist/css/**/*.css')
+//     .pipe($.purifycss(['./dist/js/*.js', './dist/**/*.html']))
+//     .pipe(gulp.dest('./dist/css/'));
+// });
+//
+// gulp.task('uncss', function() {
+//   return gulp.src('./dist/css/**/*.css')
+//     .pipe($.uncss({
+//       html: ['./dist/**/*.html']
+//     }))
+//     .pipe(gulp.dest('./dist/css/'));
+// });
 
 // gulp.task('sass', function() {
 //   return gulp
@@ -42,26 +52,30 @@ gulp.task('purify', function() {
 // });
 
 gulp.task('jade', function() {
-  gulp.src('public/*.jade')
+  gulp.src('./public/*.jade')
     .pipe($.jade({
       pretty: true,
     }))
-    .pipe(gulp.dest('public/'));
+    .pipe(gulp.dest('./public/'));
 });
 
 gulp.task('imgmin', function() {
-  return gulp.src('public/ori_images/*')
+  return gulp.src('./public/ori_images/*')
     .pipe($.imagemin({
       progressive: true,
-      svgoPlugins: [{removeViewBox: false}],
+      svgoPlugins: [{
+        removeViewBox: false,
+      }, ],
       use: [pngquant()],
     }))
-    .pipe(gulp.dest('public/img/'));
+    .pipe(gulp.dest('./public/img/'));
 });
 
 gulp.task('stylus', function() {
   return gulp
-    .src('public/stylus/*.styl')
+    .src(
+      ['./public/stylus/*.styl', '!./public/stylus/{_partial,_partial/**}', '!./public/stylus/{_const,_const/**}']
+    )
     .pipe($.sourcemaps.init())
     .pipe($.stylus({
       use: [
@@ -76,20 +90,71 @@ gulp.task('stylus', function() {
       // compress: true
     }))
     .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie9', 'opera 11'))
-    .pipe($.sourcemaps.write('.'))
+    .pipe($.purifycss(['./public/js/*.js', './public/**/*.html']))
+    .pipe($.sourcemaps.write('.', {
+      sourceMappingURL: function(file) {
+        return file.relative + '.map';
+      }
+    }))
     .pipe(gulp.dest('./public/css/'));
 
 });
 
+// dependencies tasks in order
+
 gulp.task('clean', del.bind(null, ['dist']));
 
-gulp.task('html', ['clean'], function() {
+gulp.task('copyDist', ['clean'], function() {
   return gulp
-    .src('public/**/*.*')
+    .src(['./public/**/*.*', '!./public/js/**/!(script.js)', '!./public/css/**/!(style.css)', '!./public/demo/**/*.jade', '!./public/demo/css/*styl'])
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('useref', ['copyDist'], function() {
+  var assets = $.useref.assets();
+
+  return gulp.src('./public/*.html')
+    .pipe(assets)
+    .pipe(assets.restore())
+    .pipe($.useref())
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('minifyAll', ['useref'], function() {
+  return gulp
+    .src('./dist/**/*.*')
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.csso()))
-    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
-    .pipe(gulp.dest('dist'));
+    .pipe($.if('*.html', $.minifyHtml({
+      conditionals: true,
+      loose: true,
+    })))
+
+  // .pipe($.rename(function(path) {
+  //   if (path.extname === '.js') {
+  //     path.basename += '.min';
+  //   }
+  //   if (path.extnmae === '.css') {
+  //     path.basename += '.min';
+  //   }
+  // }))
+  .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['minifyAll'], function(cb) {
+  del(['./dist/stylus', './dist/css/**.map', './dist/scss', './dist/ori_images', './dist/**.jade', './dist/partials'], cb);
+  browserSync.init({
+    server: './dist/',
+    browser: ['google chrome', 'firefox', 'IExplore.exe'],
+    notify: false,
+    open: false,
+    ghostMode: {
+      clicks: true,
+      location: true,
+      forms: true,
+      scroll: true,
+    },
+  });
 });
 
 gulp.task('default', function() {
@@ -104,39 +169,23 @@ gulp.task('default', function() {
   });
 
   gulp.task('demoJade', function() {
-    return gulp.src('public/demo/index.jade')
+    return gulp.src('./public/demo/index.jade')
       .pipe($.jade())
-      .pipe(gulp.dest('public/demo/'));
+      .pipe(gulp.dest('./public/demo/'));
   });
 
   gulp.task('demoStylus', function() {
-    return gulp.src('public/demo/css/*.styl')
-      .pipe($.stylus({compress: true}))
-      .pipe(gulp.dest('public/demo/css/'));
+    return gulp.src('./public/demo/css/*.styl')
+      .pipe($.stylus({
+        compress: true,
+      }))
+      .pipe(gulp.dest('./public/demo/css/'));
   });
-
-  gulp.watch('public/demo/**/*.*', ['demoJade', 'demoStylus']);
-  gulp.watch('public/stylus/*.styl', ['stylus']);
-  gulp.watch('public/css/*.css', ['csscomb']);
-  gulp.watch('public/**/*.jade', ['jade']);
 
   // gulp.watch('public/scss/*.scss', ['compass']);
-  gulp.watch('public/**/*.*').on('change', browserSync.reload);
-
-});
-
-gulp.task('build', ['html'], function(cb) {
-  del(['dist/stylus', 'dist/css/**.map', 'dist/scss', 'dist/ori_images', 'dist/**.jade', 'dist/partials'], cb);
-  browserSync.init({
-    server: './dist/demo/',
-    browser: ['google chrome', 'firefox', 'IExplore.exe'],
-    notify: false,
-    open: false,
-    ghostMode: {
-      clicks: true,
-      location: true,
-      forms: true,
-      scroll: true,
-    },
-  });
+  gulp.watch('./public/demo/**/*.*', ['demoJade', 'demoStylus']);
+  gulp.watch('./public/stylus/**', ['stylus']);
+  gulp.watch('./public/css/*.css', ['csscomb']);
+  gulp.watch('./public/**/*.jade', ['jade']);
+  gulp.watch('./public/**/*.*').on('change', browserSync.reload);
 });

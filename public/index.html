@@ -1,66 +1,74 @@
 <!DOCTYPE html>
-<html lang="en"></html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <title>Main-Site-Name - index </title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <header>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">Brand</a>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Main-Site-Name | Index Page   </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <!-- build:css css/index.min.css-->
+    <link href="css/depencs1.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <!-- endbuild  -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body class="baseClass desktop addBodyClasses">
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">Brand</a>
+          </div>
+          <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">Link</a></li>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form role="search" class="navbar-form navbar-left">
+              <div class="form-group">
+                <input type="text" placeholder="Search" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Link</a></li>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
-            <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form role="search" class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" placeholder="Search" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <div class="container">
-    <h1>This is Main Content Pages1</h1>
-    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis doloremque nemo quaerat rerum fugiat ea placeat natus inventore cum, maxime porro deserunt excepturi sed perspiciatis molestiae accusamus, facilis aspernatur quam incidunt iure voluptatibus omnis deleniti! Quis dignissimos molestiae incidunt, tenetur magni, saepe. Ab, iste. Excepturi ipsam rem sapiente cumque ad possimus magni laborum laudantium reiciendis id fugit eaque quasi labore facere voluptas in ducimus consequatur vero sint quisquam, iste vitae dolorem fugiat dolores. Quam, tempore delectus error nobis maxime aperiam earum dicta illo blanditiis consectetur soluta provident modi alias asperiores quia sint cum dolor tempora minus. Fugiat ad, tenetur nostrum.</p><img src="img/mavericks-wallpaper-43.jpg" alt="Mavericks">
-  </div>
-  <footer></footer>
-  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="thispage.js"></script>
-  <script src="js/script.js"></script>
-  <script>console.log('test')</script>
-</body>
+      </nav>
+    </header>
+    <div class="container">
+      <h1>This is Main Content Pages1</h1>
+      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis doloremque nemo quaerat rerum fugiat ea placeat natus inventore cum, maxime porro deserunt excepturi sed perspiciatis molestiae accusamus, facilis aspernatur quam incidunt iure voluptatibus omnis deleniti! Quis dignissimos molestiae incidunt, tenetur magni, saepe. Ab, iste. Excepturi ipsam rem sapiente cumque ad possimus magni laborum laudantium reiciendis id fugit eaque quasi labore facere voluptas in ducimus consequatur vero sint quisquam, iste vitae dolorem fugiat dolores. Quam, tempore delectus error nobis maxime aperiam earum dicta illo blanditiis consectetur soluta provident modi alias asperiores quia sint cum dolor tempora minus. Fugiat ad, tenetur nostrum.</p><img src="img/mavericks-wallpaper-43.jpg" alt="Mavericks">
+    </div>
+    <footer></footer>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- build:js js/index.min.js-->
+    <script src="js/depenc1.js"></script>
+    <script src="js/index.js"></script>
+    <!-- endbuild  -->
+    <script src="js/script.js"></script>
+    <script>console.log('test')</script>
+  </body>
+</html>

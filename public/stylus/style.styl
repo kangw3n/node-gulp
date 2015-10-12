@@ -1,7 +1,25 @@
-rupture.mobile-cutoff = 767px
-rupture.desktop-cutoff = 991px
+@import '_const/variable'
+@import '_const/rupture_settings'
+@import 'partial/header'
+@import 'partial/footer'
+
+html
+  background $bgColor
+  font-family $baseFontFamily
 
 img
   width 100%
+  +at(3)
+    width 50%
+  +at(3, anti-overlap: 0.0625em)
+    text-align left
+  +tablet()
+    font-size 20px
+
+.no-js
+  +at(300px)
+    border 1px solid red
+    width 300px
 p
-  font-size responsive 
+  font-size responsive 12px 21px
+  font-range 420px 1280px
